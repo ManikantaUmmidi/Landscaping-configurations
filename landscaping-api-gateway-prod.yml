@@ -1,0 +1,31 @@
+server:
+  port: 7070
+
+spring:
+  application:
+    name: landscaping-api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: Landscaping-User-Service
+          uri: lb://Landscaping-User-Service
+          predicates:
+            - Path=/api/users/**
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth/**
+        - id: catalog-service
+          uri: lb://catalog-service
+          predicates:
+            - Path=/api/catalog/**
+          filters:
+            - AuthenticationFilter
+
+eureka:
+  client:
+    service-url:
+      defaultZone:  http://54.165.196.5:8761/eureka
+
+auth-service-url: http://localhost:9093
