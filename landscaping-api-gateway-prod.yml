@@ -28,4 +28,4 @@ eureka:
     service-url:
       defaultZone:  http://54.165.196.5:8761/eureka
 
-auth-service-url: http://localhost:9093
+auth-service-url: http://54.92.181.186:9093
