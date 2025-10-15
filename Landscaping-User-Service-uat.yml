@@ -29,6 +29,6 @@ spring:
     max-lifetime: 1800000
 
 server:
-  port: 9094
+  port: 8080
 
 environment: uat
