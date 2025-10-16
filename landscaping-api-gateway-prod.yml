@@ -8,24 +8,35 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: Landscaping-User-Service
-          uri: lb://Landscaping-User-Service
-          predicates:
-            - Path=/api/users/**
-        - id: auth-service
-          uri: lb://auth-service
+        #        - id: Landscaping-User-Service
+        #          uri: lb://Landscaping-User-Service
+        #          predicates:
+        #            - Path=/api/users/**
+        #        - id: auth-service
+        #          uri: lb://auth-service
+        #          predicates:
+        #            - Path=/api/auth/**
+        #        - id: catalog-service
+        #          uri: lb://catalog-service
+        #          predicates:
+        #            - Path=/api/catalog/**
+        #        - id: order-service
+        #          uri: lb://order-service
+        #          predicates:
+        #            - Path=/api/orders/**
+        #        - id: payment-service
+        #          uri: lb://payment-service
+        #          predicates:
+        #            - Path=/api/payments/**
+        - id: aws-empty-project1
+          uri: lb://aws-empty-project1
           predicates:
             - Path=/api/auth/**
-        - id: catalog-service
-          uri: lb://catalog-service
-          predicates:
-            - Path=/api/catalog/**
-          filters:
-            - AuthenticationFilter
-
 eureka:
   client:
     service-url:
-      defaultZone:  http://54.165.196.5:8761/eureka
+      defaultZone: http://eureka-server:8080/eureka/
+  instance:
+    prefer-ip-address: true
 
 auth-service-url: http://54.92.181.186:9093
