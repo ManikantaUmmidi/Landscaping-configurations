@@ -1,7 +1,27 @@
 eureka:
   client:
-    service-url:
-      defaultZone: http://eureka-server.evergreen.snow:8080/eureka/
+    # URL of the Eureka server for this client to register with
+    serviceUrl:
+      defaultZone: http://eureka-server.evergreen.snow:8080/eureka
+    # The gateway registers with Eureka so other services can find it (optional)
+    register-with-eureka: true
+    # The gateway fetches the registry to discover other microservices
+    fetch-registry: true
+  instance:
+    # Setting the hostname is crucial in AWS ECS for correct registration
+    hostname: ${spring.application.name}
+
+# Expose actuator endpoints for monitoring and health checks
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
+
+auth-service-url: http://54.92.181.186:9093
 
 
 spring:
@@ -31,6 +51,5 @@ spring:
 
 server:
   port: 8080
-  address: 0.0.0.0
 
 

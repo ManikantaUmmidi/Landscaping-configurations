@@ -1,6 +1,5 @@
 server:
   port: 8080
-  address: 0.0.0.0
 
 spring:
   application:
@@ -8,18 +7,45 @@ spring:
 
   cloud:
     gateway:
+      # Enable the discovery locator to create routes automatically
       discovery:
         locator:
           enabled: true
-          lowerCaseServiceId: true
+          # Make service IDs lowercase for easier URL matching
+          lower-case-service-id: true
       routes:
+        # Example 1: A manually configured route for a specific service.
+        # It uses the 'lb://' prefix for load-balancing with Eureka.
         - id: aws-empty-project1
-          uri: lb://AWS-EMPTY-PROJECT1
+          uri: lb://aws-empty-project1
           predicates:
+            # Matches requests with a path starting with /users/
             - Path=/api/auth/**
+          filters:
+            # Strips the /users prefix before sending the request to the target service
+            - StripPrefix=1
+
 eureka:
   client:
-    service-url:
-      defaultZone: http://eureka-server.evergreen.snow:8080/eureka/
+    # URL of the Eureka server for this client to register with
+    serviceUrl:
+      defaultZone: http://eureka-server.evergreen.snow:8080/eureka
+    # The gateway registers with Eureka so other services can find it (optional)
+    register-with-eureka: true
+    # The gateway fetches the registry to discover other microservices
+    fetch-registry: true
+  instance:
+    # Setting the hostname is crucial in AWS ECS for correct registration
+    hostname: ${spring.application.name}
+
+# Expose actuator endpoints for monitoring and health checks
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
 
 auth-service-url: http://54.92.181.186:9093
