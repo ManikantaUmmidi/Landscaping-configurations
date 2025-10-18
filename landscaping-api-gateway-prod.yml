@@ -21,9 +21,6 @@ spring:
           predicates:
             # Matches requests with a path starting with /users/
             - Path=/api/auth/**
-          filters:
-            # Strips the /users prefix before sending the request to the target service
-            - StripPrefix=1
 
 eureka:
   client:
