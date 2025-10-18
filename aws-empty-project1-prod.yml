@@ -2,10 +2,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka-server.evergreen.snow:8080/eureka/
-  instance:
-    prefer-ip-address: true
-    ip-address: ${HOST_IP:}
-    instance-id: ${spring.application.name}:${HOST_IP}:${server.port}
+
 
 spring:
   application:
