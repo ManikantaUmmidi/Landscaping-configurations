@@ -13,7 +13,7 @@ spring:
           lowerCaseServiceId: true
       routes:
         - id: aws-empty-project1
-          uri: http://10.0.3.236:8080
+          uri: lb://aws-empty-project1
           predicates:
             - Path=/api/auth/**
 eureka:
@@ -22,5 +22,6 @@ eureka:
       defaultZone: http://eureka-server.evergreen.snow:8080/eureka/
   instance:
     prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
 
 auth-service-url: http://54.92.181.186:9093
