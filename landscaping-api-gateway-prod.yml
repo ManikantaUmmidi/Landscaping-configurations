@@ -13,7 +13,7 @@ spring:
           lowerCaseServiceId: true
       routes:
         - id: aws-empty-project1
-          uri: lb://aws-empty-project1
+          uri: http://10.0.3.236:8080
           predicates:
             - Path=/api/auth/**
 eureka:
