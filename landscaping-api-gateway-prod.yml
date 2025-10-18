@@ -7,27 +7,11 @@ spring:
 
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
       routes:
-        #        - id: Landscaping-User-Service
-        #          uri: lb://Landscaping-User-Service
-        #          predicates:
-        #            - Path=/api/users/**
-        #        - id: auth-service
-        #          uri: lb://auth-service
-        #          predicates:
-        #            - Path=/api/auth/**
-        #        - id: catalog-service
-        #          uri: lb://catalog-service
-        #          predicates:
-        #            - Path=/api/catalog/**
-        #        - id: order-service
-        #          uri: lb://order-service
-        #          predicates:
-        #            - Path=/api/orders/**
-        #        - id: payment-service
-        #          uri: lb://payment-service
-        #          predicates:
-        #            - Path=/api/payments/**
         - id: aws-empty-project1
           uri: lb://aws-empty-project1
           predicates:
